@@ -34,19 +34,27 @@ function readLine() {
 
 function findSum(numbers, queries) {
 
-    let sum = [];
+    // let sum = [];
 
-    for (let i = 0; i < queries.length; i++) {
-        let auxSum = 0;
-        for (let j = queries[i][0] - 1; j <= queries[i][1] - 1; j++) {
-            auxSum += numbers[j];
-            if (numbers[j] == 0) {
-                auxSum += queries[i][2];
-            }
-        }
-        sum[i] = auxSum;
-    }
-    return sum;
+    // for (let i = 0; i < queries.length; i++) {
+    //     let auxSum = 0;
+    //     for (let j = queries[i][0] - 1; j <= queries[i][1] - 1; j++) {
+    //         auxSum += numbers[j];
+    //         if (numbers[j] == 0) {
+    //             auxSum += queries[i][2];
+    //         }
+    //     }
+    //     sum[i] = auxSum;
+    // }
+    // return sum;
+
+
+    queries.map((query) => {
+        const setOfNumbersToCheckAndSum = numbers.slice(query[0], query[0] + query[1])
+        const checkedSet = setOfNumbersToCheckAndSum.map((number) => number === 0 ? query[2] : number)
+        return checkedSet.reduce((sum, number) => { return sum + number })
+    })
+
 }
 
 function main() {
